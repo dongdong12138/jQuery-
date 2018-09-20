@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0 450px;
+        }
+        .images {
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.5s;
+        }
+        .window {
+            border: 2px solid green;
+            width: 300px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="images">
+            <img src="1.jpg" alt="杨超越" width="300px">
+            <img src="2.jpg" alt="杨超越" width="300px">
+            <img src="3.jpg" alt="杨超越" width="300px">
+            <img src="3.jpg" alt="杨超越" width="300px">
+            <img src="5.jpg" alt="杨超越" width="300px">
+        </div>
+    </div>
+    <button id="btn1">第1张</button>
+    <button id="btn2">第2张</button>
+    <button id="btn3">第3张</button>
+    <button id="btn4">第4张</button>
+    <button id="btn5">第5张</button>
+
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+    $('#btn1').on('click', function () {
+        $('.images').css({
+            transform: 'translateX(0)'
+        })
+    } )
+    $('#btn2').on('click', function () {
+        $('.images').css({
+            transform: 'translateX(-300px)'
+        })
+    } )
+    $('#btn3').on('click', function () {
+        $('.images').css({
+            transform: 'translateX(-600px)'
+        })
+    } )
+    $('#btn4').on('click', function () {
+        $('.images').css({
+            transform: 'translateX(-900px)'
+        })
+    } )
+    $('#btn5').on('click', function () {
+        $('.images').css({
+            transform: 'translateX(-1200px)'
+        })
+    } )
+</script>
+</body>
+</html>
