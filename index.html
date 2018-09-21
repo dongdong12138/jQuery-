@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>自动轮播</title>
     <style>
         body {
-            padding: 0 450px;
+            padding: 0 459px;
         }
         .images {
             display: flex;
@@ -19,51 +19,75 @@
             width: 300px;
             overflow: hidden;
         }
+        .red {
+            color: red;
+        }
     </style>
 </head>
+
 <body>
     <div class="window">
         <div class="images">
-            <img src="1.jpg" alt="杨超越" width="300px">
-            <img src="2.jpg" alt="杨超越" width="300px">
-            <img src="3.jpg" alt="杨超越" width="300px">
-            <img src="3.jpg" alt="杨超越" width="300px">
-            <img src="5.jpg" alt="杨超越" width="300px">
+            <img src="1.jpg" alt="">
+            <img src="2.jpg" alt="">
+            <img src="3.jpg" alt="">
+            <img src="4.jpg" alt="">
+            <img src="5.jpg" alt="">
         </div>
     </div>
-    <button id="btn1">第1张</button>
-    <button id="btn2">第2张</button>
-    <button id="btn3">第3张</button>
-    <button id="btn4">第4张</button>
-    <button id="btn5">第5张</button>
 
-<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-<script>
-    $('#btn1').on('click', function () {
-        $('.images').css({
-            transform: 'translateX(0)'
+    <span class="buttons">
+        <span id="btn1">第1张</span>
+        <span id="btn2">第2张</span>
+        <span id="btn3">第3张</span>
+        <span id="btn4">第4张</span>
+        <span id="btn5">第5张</span>
+    </span>
+
+
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+        // 点击按钮，显示相应图片
+        var $buttons = $('.buttons > span')
+        for (let i = 0; i < $buttons.length; i ++) {
+            $($buttons[i]).on('click', function (event) {
+                var index = $(event.currentTarget).index()
+                var px = index * -300
+                $('.images').css({
+                    transform: 'translateX('+ px +'px)'
+                })
+                n = index
+                $buttons.eq(n).addClass('red').siblings('.red').removeClass('red')
+            })
+        }
+
+
+        // 自动轮播
+        var n = 0
+        var size = $('.images > img').length
+        $buttons.eq(n%size).trigger('click').addClass('red').siblings('.red').removeClass('red')
+        var timerId = setInterval(() => {
+            n ++
+            $buttons.eq(n%size).trigger('click').addClass('red').siblings('.red').removeClass('red')
+        }, 2000)
+
+
+        // 取消和开启自动轮播
+        $('.window').on('mouseenter', function () {
+            window.clearInterval(timerId)
         })
-    } )
-    $('#btn2').on('click', function () {
-        $('.images').css({
-            transform: 'translateX(-300px)'
+        $('.window').on('mouseleave', function () {
+            timerId = setInterval(() => {
+                n ++
+                $buttons.eq(n%size).trigger('click').addClass('red').siblings('.red').removeClass('red')
+            }, 2000)
         })
-    } )
-    $('#btn3').on('click', function () {
-        $('.images').css({
-            transform: 'translateX(-600px)'
-        })
-    } )
-    $('#btn4').on('click', function () {
-        $('.images').css({
-            transform: 'translateX(-900px)'
-        })
-    } )
-    $('#btn5').on('click', function () {
-        $('.images').css({
-            transform: 'translateX(-1200px)'
-        })
-    } )
-</script>
+
+
+
+
+
+
+    </script>
 </body>
 </html>
